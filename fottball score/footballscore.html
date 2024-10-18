@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Football Score</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .score-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+        }
+        .match {
+            margin: 20px 0;
+        }
+        .team {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .time {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="score-container">
+        <h1>Live Football Score</h1>
+        <div class="match">
+            <div class="team">Team A vs Team B</div>
+            <div class="score" id="score">1 - 2</div>
+            <div class="time" id="time">72' Minute</div>
+        </div>
+    </div>
+
+    <script>
+        // Placeholder for live score and time update.
+        // In real applications, you would fetch data from an API.
+        const scoreElement = document.getElementById('score');
+        const timeElement = document.getElementById('time');
+
+        // Example of updating the score after 5 seconds
+        setTimeout(() => {
+            scoreElement.innerText = '2 - 2';
+            timeElement.innerText = "80' Minute";
+        }, 5000);
+    </script>
+
+</body>
+</html>
