@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+        .display {
+            width: 100%;
+            height: 60px;
+            background-color: #333;
+            color: white;
+            text-align: right;
+            padding: 10px;
+            font-size: 2em;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .buttons button {
+            padding: 20px;
+            font-size: 1.5em;
+            border: none;
+            background-color: #ff8a00;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .buttons button:hover {
+            background-color: #e57e00;
+        }
+        .buttons button.clear {
+            background-color: #e52e71;
+        }
+        .buttons button.clear:hover {
+            background-color: #c92060;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button onclick="clearDisplay()" class="clear">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="appendOperator('%')">%</button>
+            <button onclick="appendOperator('/')">/</button>
+
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendOperator('*')">*</button>
+
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendOperator('-')">-</button>
+
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendOperator('+')">+</button>
+
+            <button onclick="appendNumber('0')" style="grid-column: span 2;">0</button>
+            <button onclick="appendNumber('.')">.</button>
+            <button onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '';
+        let operator = '';
+
+        function appendNumber(number) {
+            if (display.innerText === '0' || operator === '=') {
+                currentInput = number;
+                operator = '';
+            } else {
+                currentInput += number;
+            }
+            display.innerText = currentInput;
+        }
+
+        function appendOperator(op) {
+            if (operator && currentInput) {
+                calculate();
+            }
+            operator = op;
+            currentInput += ' ' + op + ' ';
+            display.innerText = currentInput;
+        }
+
+        function calculate() {
+            try {
+                display.innerText = eval(currentInput.replace('%', '/100'));
+                operator = '=';
+            } catch (error) {
+                display.innerText = 'Error';
+                operator = '';
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            operator = '';
+            display.innerText = '0';
+        }
+
+        function deleteLast() {
+            if (operator === '=') {
+                clearDisplay();
+            } else {
+                currentInput = currentInput.slice(0, -1) || '0';
+                display.innerText = currentInput;
+            }
+        }
+    </script>
+
+</body>
+</html>
